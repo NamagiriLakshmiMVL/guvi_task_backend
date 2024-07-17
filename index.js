@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT;
 const userRoute = require("./routes/userRouter");
+const ProfileRoute = require("./routes/profileRouter");
 
 app.get("/", (req, res) => {
   res.send("Hello");
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/users", userRoute);
+app.use("/profile", ProfileRoute);
 
 mongoose
   .connect(process.env.MONGO_URL)

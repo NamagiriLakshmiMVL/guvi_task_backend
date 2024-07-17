@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
     const { password, email, name } = req.body;
     const isUserExists = await userModel.findOne({ email: email });
     if (isUserExists) {
-      res.send("Email Already Exists");
+      res.send({ message: "Email Already Exists" });
       return;
     }
     const hashedPassword = await genPassword(password);
@@ -19,9 +19,9 @@ router.post("/register", async (req, res) => {
       name,
     });
     await newUser.save();
-    res.send("User Added Successfully");
+    res.send({ message: "User Added Successfully" });
   } catch (err) {
-    res.send(err);
+    res.send({ message: err });
   }
 });
 
